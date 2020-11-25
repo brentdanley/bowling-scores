@@ -1,0 +1,31 @@
+.wrapper {
+    display: grid;
+    grid-template-areas: 'frame frame' 'roll1 roll2' 'score score';
+    grid-template-columns: 1fr 1fr;
+    width: 80px;
+    border: 1px solid black;
+
+    .roll1 {
+        grid-area: roll1;
+        font-size: large;
+        height: 20px;
+    }
+    
+    .roll2 {
+        grid-area: roll2;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .frame { 
+        grid-area: frame;
+        background-color: rgb(204, 204, 145);
+        border-bottom: 1px solid black;
+        font-size: small;
+    }
+
+    .score {
+        grid-area: score;
+        height: 17px;
+    }
+}

@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
 import './App.css';
 
+import Rolls from './components/Rolls'
+import Frames from './components/Frames'
+
 function App() {
+  const [frames, setFrames] = useState([[]])
+  const [totalScore, setTotalScore] = useState(0)
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <h2>{`Score: ${totalScore}`}</h2>
+      <Frames frames={frames} score={totalScore} />
+      <Rolls updateFrames={setFrames} frames={frames} score={totalScore} updateScore={setTotalScore} />
     </div>
   );
 }
