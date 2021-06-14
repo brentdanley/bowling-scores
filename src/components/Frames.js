@@ -4,19 +4,21 @@ import styles from './Frames.module.scss'
 
 import SingleFrame from './SingleFrame'
 
-const Frames = (props) => {
+const Frames = ({ frames }) => {
+    let score = 0
 
     return (
         <div className={styles.wrapper}>
         {
-            props.frames.map((frame, i) => {
+            frames.map((frame, i) => {
+                score += frame.roll1 + frame.roll2 + frame.roll3
+                score = frame.roll1 + frame.roll2 >= 10 && frame.roll3 === null ? '' : score
                 const p = {
                     frame: frame,
                     index: i,
-                    key: i,
-                    stringScore: props.score,
+                    stringScore: score,
                 }
-                return <SingleFrame {...p} />
+                if (i !== 10) return <SingleFrame {...p} />
             })
         }
         </div>

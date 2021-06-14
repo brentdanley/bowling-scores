@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Frame } from '../App'
 
 const Rolls = (props) => {
     const [pinsLeft, setPins] = useState(10)
@@ -9,33 +10,46 @@ const Rolls = (props) => {
 
     const handleClick = (roll) => {
 
+        let rollPoints = roll
+
         const tempFrames = [...props.frames]
         // Add roll to current frame
-        if (typeof tempFrames[currentFrame] === 'undefined') {
-            tempFrames.push([[roll]]) 
+        if (typeof tempFrames[currentFrame] === 'undefined' && currentFrame < 10) {
+            tempFrames.push(new Frame()) 
+        } else if (tempFrames[currentFrame].roll1 === null) {
+            tempFrames[currentFrame].roll1 = roll
         } else {
-            tempFrames[currentFrame].push(roll)
+            tempFrames[currentFrame].roll2 = roll
         }
 
         // BONUSES
         // The previous frame was a strike or spare
-        if (typeof tempFrames[currentFrame - 1] !== 'undefined') {
-            if (tempFrames[currentFrame - 1][0] === 10 || tempFrames[currentFrame - 1][0] + tempFrames[currentFrame - 1][1] === 10) {
-                tempFrames[currentFrame - 1].push(roll)
+        if (currentFrame > 0) {
+            if (tempFrames[currentFrame - 1].roll1 === 10 || tempFrames[currentFrame - 1].roll1 + tempFrames[currentFrame - 1].roll2 === 10) {
+                if (tempFrames[currentFrame - 1].roll2 === null) {
+                    tempFrames[currentFrame - 1].roll2 = roll
+                }
+                else {
+                    tempFrames[currentFrame - 1].roll3 = roll
+                }
+                rollPoints += roll
             }
         }
 
         // There was a strike two frames ago
-        if (typeof tempFrames[currentFrame - 2] !== 'undefined' && tempFrames[currentFrame-2][0] === 10) {
-            if (tempFrames[currentFrame - 1][0] === 10) {
-                tempFrames[currentFrame - 2].push(roll)
+        if (currentFrame > 1 && tempFrames[currentFrame - 2].roll1 === 10) {
+            if (tempFrames[currentFrame - 1].roll3 === null) {
+                tempFrames[currentFrame - 2].roll3 = roll
+                rollPoints += roll
             }
         }
+
+        props.updateScore(props.score + rollPoints)
         
         // SET PINS
         // string is complete
-        if (currentFrame >= 10 &&
-            (tempFrames[9][0] + tempFrames[9][1] < 10)) {
+        if (currentFrame === 10 &&
+            (tempFrames[9].roll1 + tempFrames[9].roll2 > 10)) {
             setPins(-1)
         } else {
             // resets pins after roll
@@ -46,7 +60,7 @@ const Rolls = (props) => {
                 setFirst(true)
                 setPins(10)
                 setCurrentFrame(currentFrame + 1)
-                tempFrames.push([])
+                tempFrames.push(new Frame())
             }
         }
 
