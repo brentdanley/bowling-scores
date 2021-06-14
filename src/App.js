@@ -24,7 +24,6 @@ export class Frame {
     this.roll1 = null
     this.roll2 = null
     this.roll3 = null
-    this.frameScore = null
   }
 }
 
