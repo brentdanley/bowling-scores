@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Frame } from '../App'
 
 const Rolls = (props) => {
     const [pinsLeft, setPins] = useState(10)
@@ -14,12 +13,12 @@ const Rolls = (props) => {
 
         const tempFrames = [...props.frames]
         // Add roll to current frame
-        if (typeof tempFrames[currentFrame] === 'undefined' && currentFrame < 10) {
-            tempFrames.push(new Frame()) 
-        } else if (tempFrames[currentFrame].roll1 === null) {
-            tempFrames[currentFrame].roll1 = roll
-        } else {
-            tempFrames[currentFrame].roll2 = roll
+        if (currentFrame < 10) {
+            if (tempFrames[currentFrame].roll1 === null) {
+                tempFrames[currentFrame].roll1 = roll
+            } else {
+                tempFrames[currentFrame].roll2 = roll
+            }
         }
 
         // BONUSES
@@ -48,8 +47,7 @@ const Rolls = (props) => {
         
         // SET PINS
         // string is complete
-        if (currentFrame === 10 &&
-            (tempFrames[9].roll1 + tempFrames[9].roll2 > 10)) {
+        if (tempFrames[9].roll3 !== null || (tempFrames[9].roll2 !== null && tempFrames[9].roll1 + tempFrames[9].roll2 < 10)) {
             setPins(-1)
         } else {
             // resets pins after roll
@@ -60,7 +58,6 @@ const Rolls = (props) => {
                 setFirst(true)
                 setPins(10)
                 setCurrentFrame(currentFrame + 1)
-                tempFrames.push(new Frame())
             }
         }
 

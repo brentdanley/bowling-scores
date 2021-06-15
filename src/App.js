@@ -5,7 +5,7 @@ import Rolls from './components/Rolls'
 import Frames from './components/Frames'
 
 function App() {
-  const [frames, setFrames] = useState([new Frame()])
+  const [frames, setFrames] = useState([new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame()])
   const [totalScore, setTotalScore] = useState(0)
 
   return (
