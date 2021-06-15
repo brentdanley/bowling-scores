@@ -31,7 +31,7 @@ const Rolls = (props) => {
                 else {
                     tempFrames[currentFrame - 1].roll3 = roll
                 }
-                rollPoints += roll
+                if (currentFrame < 10) rollPoints += roll
             }
         }
 
@@ -39,7 +39,7 @@ const Rolls = (props) => {
         if (currentFrame > 1 && tempFrames[currentFrame - 2].roll1 === 10) {
             if (tempFrames[currentFrame - 1].roll3 === null) {
                 tempFrames[currentFrame - 2].roll3 = roll
-                rollPoints += roll
+                if (currentFrame < 10) rollPoints += roll
             }
         }
 
