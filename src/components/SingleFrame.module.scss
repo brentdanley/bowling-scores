@@ -5,6 +5,11 @@
     width: 80px;
     border: 1px solid black;
 
+    &.ten {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: 'frame frame frame' 'roll1 roll2 roll3' 'score score score';
+    }
+
     .roll1 {
         grid-area: roll1;
         font-size: large;
@@ -13,6 +18,12 @@
     
     .roll2 {
         grid-area: roll2;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+
+    .roll3 {
+        grid-area: roll3;
         border-left: 1px solid black;
         border-bottom: 1px solid black;
     }
