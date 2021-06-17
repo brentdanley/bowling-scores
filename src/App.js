@@ -12,7 +12,6 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-      <h2>{`Score: ${totalScore}`}</h2>
       <Frames frames={frames} score={totalScore} />
       <Rolls updateFrames={setFrames} frames={frames} score={totalScore} updateScore={setTotalScore} />
     </div>

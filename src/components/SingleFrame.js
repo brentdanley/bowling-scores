@@ -22,17 +22,6 @@ let frameJSX = (frame, i, stringScore) => {
         return <><div className={styles.roll1}>{frame.roll1 < 10 ? frame.roll1 : 'X'}</div><div className={styles.roll2}>{frame.roll2 !== null && frame.roll1 + frame.roll2 === 10 ? '/' : frame.roll2}</div><div className={styles.roll3}>{frame.roll3}</div><div className={styles.score}>{isCompletedFrame(frame) ? stringScore : ''}</div></>
     }
     return <><div className={styles.roll1}>{frame.roll1 < 10 ? frame.roll1 : ''}</div><div className={styles.roll2}>{roll2(frame)}</div><div className={styles.score}>{isCompletedFrame(frame) ? stringScore : ''}</div></>
-    // Strike!
-    if (frame.roll1 === 10) {
-        return <><div className={styles.roll1}></div><div className={styles.roll2}>X</div><div className={styles.score}>{isCompletedFrame(frame) ? stringScore : ''}</div></>
-    }
-
-    // Spare
-    if (frame.roll1 + frame.roll2 === 10) { 
-        return <><div className={styles.roll1}>{frame.roll1}</div><div className={styles.roll2}>/</div><div className={styles.score}>{isCompletedFrame(frame) ? stringScore : ''}</div></>
-    }
-    
-    return <><div className={styles.roll1}>{frame.roll1}</div><div className={styles.roll2}>{frame.roll2}</div><div className={styles.score}>{isCompletedFrame(frame) ? stringScore : ''}</div></>
 }
 
 const SingleFrame = ({ frame, index, stringScore }) => {

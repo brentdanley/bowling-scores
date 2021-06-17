@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {Frame} from '../App'
 
 const Rolls = (props) => {
     const [pinsLeft, setPins] = useState(10)
@@ -44,7 +45,7 @@ const Rolls = (props) => {
         }
 
         props.updateScore(props.score + rollPoints)
-        
+
         // SET PINS
         // string is complete
         if (tempFrames[9].roll3 !== null || (tempFrames[9].roll2 !== null && tempFrames[9].roll1 + tempFrames[9].roll2 < 10)) {
@@ -65,6 +66,12 @@ const Rolls = (props) => {
 
     }
 
+    const resetString = () => {
+        props.updateFrames([new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame()])
+        setPins(10)
+        setCurrentFrame(0)
+    }
+
     return (
         <div>
             {
@@ -76,6 +83,7 @@ const Rolls = (props) => {
                         >{(i === pinsLeft && !isFirstRoll) ? 'Spare!' : button}</button>
                 })
             }
+            <button onClick={resetString}>Reset</button>
         </div>
     )
 }
