@@ -12,8 +12,10 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
+      <h1>Let's make sense of a bowling score.</h1>
       <Frames frames={frames} score={totalScore} />
       <Rolls updateFrames={setFrames} frames={frames} score={totalScore} updateScore={setTotalScore} />
+
     </div>
   );
 }
