@@ -15,4 +15,4 @@
 
 ## Bug
 - When a 10 is rolled for roll3 of frame 10, there's an error.
-- ~~Score isn't printed in the first frame.~~
+- Score isn't printed in the first frame, and neither is the second roll.

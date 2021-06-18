@@ -11,6 +11,18 @@
             color: red;
             font-weight: bold;
         }
+
+        &.ten {
+            .roll1 {
+                color: red;
+                font-weight: bold;
+            }
+            
+            .roll2 {
+                color: black;
+                font-weight: normal;
+            }
+        }
     }
     
     &.spare {
