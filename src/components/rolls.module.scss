@@ -1,0 +1,16 @@
+// Sass partial for Rolls component
+
+.resetButton {
+    display: block;
+    border-radius: 5px;
+    color: white;
+    background: radial-gradient(ellipse at center, #2750bf 0%,#3427ac 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7em 1.4em;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 20px auto;
+    text-transform: uppercase;
+}

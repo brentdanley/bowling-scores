@@ -18,6 +18,7 @@ const roll2 = frame => {
 }
 
 let frameJSX = (frame, i, stringScore) => {
+
     if (i === 9) {
         return <><div className={styles.roll1}>{frame.roll1 < 10 ? frame.roll1 : 'X'}</div><div className={styles.roll2}>{frame.roll2 !== null && frame.roll1 + frame.roll2 === 10 ? '/' : frame.roll2}</div><div className={styles.roll3}>{frame.roll3}</div><div className={styles.score}>{isCompletedFrame(frame) ? stringScore : ''}</div></>
     }
@@ -25,10 +26,14 @@ let frameJSX = (frame, i, stringScore) => {
 }
 
 const SingleFrame = ({ frame, index, stringScore }) => {
-
-    const style = (index === 9) ? `${styles.wrapper} ${styles.ten}` : styles.wrapper
+    const isStrike = frame.roll1 === 10 ? true : false
+    const isSpare = frame.roll2 !== null && frame.roll1 + frame.roll2 === 10 ? true : false
+    
+    let frameStyle = (index === 9) ? `${styles.wrapper} ${styles.ten}` : styles.wrapper
+    if (isStrike) frameStyle = `${frameStyle} ${styles.strike}`
+    if (isSpare) frameStyle = `${frameStyle} ${styles.spare}`
     return (
-        <div className={style}><div className={styles.frame}>{index + 1}</div>{frameJSX(frame, index, stringScore)}</div>
+        <div className={frameStyle} key={index}><div className={styles.frameHeader}>{index + 1}</div>{frameJSX(frame, index, stringScore)}</div>
     )
 }
 

@@ -16,6 +16,7 @@ const Frames = ({ frames }) => {
                 const p = {
                     frame: frame,
                     index: i,
+                    key: i,
                     stringScore: score,
                 }
                 if (i !== 10) return <SingleFrame {...p} />

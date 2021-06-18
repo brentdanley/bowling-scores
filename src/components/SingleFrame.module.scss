@@ -2,18 +2,53 @@
     display: grid;
     grid-template-areas: 'frame frame' 'roll1 roll2' 'score score';
     grid-template-columns: 1fr 1fr;
-    width: 80px;
     border: 1px solid black;
-
+    
+    &.strike {
+        background-color:rgb(238, 137, 154);
+        
+        .roll2 {
+            color: red;
+            font-weight: bold;
+        }
+    }
+    
+    &.spare {
+        background-color: rgb(179, 179, 179);
+        
+        .roll2 {
+            color: rgb(14, 68, 148);
+            font-weight: bold;
+        }
+    }
+    
     &.ten {
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-areas: 'frame frame frame' 'roll1 roll2 roll3' 'score score score';
     }
+    
+    .frameHeader { 
+        grid-area: frame;
+        background-color: rgb(26, 72, 101);
+        border-bottom: 1px solid black;
+        font-size: 1em;
+        color: white;
+        padding: .3em;
+    }
+    
+    .roll1, .roll2, .roll3 {
+        font-size: 1.2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.3em;
+        padding: 0.3em;
+        height: 1em;
+        width: 1em;
+    }
 
     .roll1 {
         grid-area: roll1;
-        font-size: large;
-        height: 20px;
     }
     
     .roll2 {
@@ -21,23 +56,16 @@
         border-left: 1px solid black;
         border-bottom: 1px solid black;
     }
-
+    
     .roll3 {
         grid-area: roll3;
         border-left: 1px solid black;
         border-bottom: 1px solid black;
     }
-
-    .frame { 
-        grid-area: frame;
-        background-color: rgb(26, 72, 101);
-        border-bottom: 1px solid black;
-        font-size: small;
-        color: white;
-    }
-
+    
     .score {
         grid-area: score;
         height: 17px;
+        padding: .7em;
     }
 }

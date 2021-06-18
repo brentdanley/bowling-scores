@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import {Frame} from '../App'
 
+import styles from './rolls.module.scss'
+
 const Rolls = (props) => {
     const [pinsLeft, setPins] = useState(10)
     const [isFirstRoll, setFirst] = useState(true)
@@ -83,7 +85,7 @@ const Rolls = (props) => {
                         >{(i === pinsLeft && !isFirstRoll) ? 'Spare!' : button}</button>
                 })
             }
-            <button onClick={resetString}>Reset</button>
+            <button className={styles.resetButton} onClick={resetString}>Bowl!</button>
         </div>
     )
 }
