@@ -1,10 +1,11 @@
 // Sass partial for Rolls component
 
 .resetButton {
+    $earthy-blue: rgb(26, 72, 101);
     display: block;
     border-radius: 5px;
     color: white;
-    background: radial-gradient(ellipse at center, #2750bf 0%,#3427ac 100%);
+    background: radial-gradient(ellipse at center, lighten($earthy-blue, 20%) 0%, $earthy-blue 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,4 +14,21 @@
     font-weight: bold;
     margin: 20px auto;
     text-transform: uppercase;
+}
+
+.pin {
+    background-color: transparent;
+    background: transparent url(https://www.dropbox.com/s/csko576zz0fkdcs/bowling-pin-illustration.png?dl=1) center/contain no-repeat;
+    font: 700 1.1em/1.1em Ubuntu, sans-serif;
+    color: rgb(0 0 0);
+    border: none;
+    margin: 0;
+    width: 50px;
+    height: 90px;
+    padding-top: 20px;
+    cursor: pointer;
+
+    &:disabled {
+        opacity: 30%;
+    }
 }

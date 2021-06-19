@@ -8,7 +8,7 @@ const Rolls = (props) => {
     const [isFirstRoll, setFirst] = useState(true)
     const [currentFrame, setCurrentFrame] = useState(0)
 
-    const rollButtons = ['Gutter', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Strike!']
+    const rollButtons = ['G', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'X']
 
     const handleClick = (roll) => {
 
@@ -79,13 +79,14 @@ const Rolls = (props) => {
             {
                 rollButtons.map((button, i) => {
                     return <button
+                        className={styles.pin}
                         onClick={() => handleClick(i)}
                         disabled={i > pinsLeft ? 'disabled' : false}
                         key={i}
-                        >{(i === pinsLeft && !isFirstRoll) ? 'Spare!' : button}</button>
+                        >{(i === pinsLeft && !isFirstRoll) ? '/' : button}</button>
                 })
             }
-            <button className={styles.resetButton} onClick={resetString}>Bowl!</button>
+            <button className={styles.resetButton} onClick={resetString}>Reset String</button>
         </div>
     )
 }

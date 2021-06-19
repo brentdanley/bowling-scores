@@ -42,7 +42,7 @@
     .frameHeader { 
         font: 400 1rem/1.2em Ubuntu, sans-serif;
         grid-area: frame;
-        background-color: rgb(26, 72, 101);
+        background-color: var(--earthy-blue);
         border-bottom: 1px solid black;
         font-size: 1em;
         color: white;
@@ -50,6 +50,7 @@
     }
     
     .roll1, .roll2, .roll3 {
+        font-family: 'Indie Flower', cursive;
         font-size: 1.2em;
         display: flex;
         align-items: center;
@@ -77,6 +78,9 @@
     }
     
     .score {
+        font-family: 'Indie Flower', cursive;
+        font-size: 1.2em;
+        font-weight: bold;
         grid-area: score;
         height: 17px;
         padding: .7em;

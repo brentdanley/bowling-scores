@@ -2,8 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 .App {
+  --earthy-blue: rgb(26, 72, 101);
+  font: 400 18px/18px Ubuntu, sans-serif;
   text-align: center;
-  font-family: 'Indie Flower', cursive;
 }
 
 .App-logo {
