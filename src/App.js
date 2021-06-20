@@ -20,10 +20,10 @@ function App() {
         <h3>How is bowling played?</h3>
         <p>In Ten Pin bowling, there are ten pins at the end of a wooden lane. A bowler has two rolls of a heavy ball to knock them down. That's basically it.</p>
         
-        <h3>Strike!</h3>
+        <h3>Strike! (X)</h3>
         <p>If all ten pins are knocked down on the first roll, that's called a strike. The pins are reset for the next frame. Each pin knocked down is a point, and as a bonus for a job well done, the next two balls rolled in turn count toward the frame in which the strike was rolled. So if on the next two rolls the bowler also rolls strikes, and those pins are added to the frame total, that frame is worth 30 points! Do this for all ten frames and that's a perfect game, score 300! Each frame, therefore, is worth a maximum of 30 points.</p>
 
-        <h3>Spare</h3>
+        <h3>Spare (/)</h3>
         <p>Knocking all the pins down on the first roll is a strike. If it takes both rolls to knock down all the pins, this is a spare. A spare is less impressive than a strike, so only gets the bowler a bonus of the next roll's pins for the frame.</p>
 
         <h3>Open</h3>
