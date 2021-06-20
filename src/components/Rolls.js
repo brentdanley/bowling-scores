@@ -8,7 +8,7 @@ const Rolls = (props) => {
     const [isFirstRoll, setFirst] = useState(true)
     const [currentFrame, setCurrentFrame] = useState(0)
 
-    const rollButtons = ['G', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'X']
+    const rollButtons = ['-', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'X']
 
     const handleClick = (roll) => {
 

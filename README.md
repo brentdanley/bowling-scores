@@ -3,9 +3,9 @@
 
 ## To do
 1. Explain bowling scoring algorithms - For each roll, explain the score.
-1. Styles
 1. Fun animations for strikes and spares
 1. Indicate visually current frame
+1. ~~Styles~~
 1. ~~Styles frame based on strike, spare, or open.~~
 1. ~~Update page title and favicon~~
 1. ~~Show all frames~~

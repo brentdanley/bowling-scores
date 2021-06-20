@@ -19,7 +19,8 @@ const Frames = ({ frames }) => {
                     key: i,
                     stringScore: score,
                 }
-                if (i !== 10) return <SingleFrame {...p} />
+                if (i >= 10) return false
+                return <SingleFrame {...p} />
             })
         }
         </div>

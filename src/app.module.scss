@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
-.App {
+.app {
   --earthy-blue: rgb(26, 72, 101);
   font: 400 18px/18px Ubuntu, sans-serif;
   text-align: center;
 }
 
-.App-logo {
+.appLogo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -18,10 +19,11 @@
   }
 }
 
-.App-header {
+.AppHeader {
+  font-family: 'Roboto Slab', serif;
 }
 
-.App-link {
+.AppLink {
   color: #61dafb;
 }
 
@@ -31,5 +33,22 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.explanation {
+  font-family: 'Roboto Slab', serif;
+  width: 80%;
+  max-width: 720px;
+  text-align: left;
+  margin: 0 auto;
+
+  h3 + p::first-letter {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+
+  p {
+    line-height: 1.6em;
   }
 }
