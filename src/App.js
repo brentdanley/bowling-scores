@@ -28,6 +28,9 @@ function App() {
 
         <h3>Open</h3>
         <p>If the bowler gets neither a strike nor a spare in the frame, meaning with two rolls of the ball they failed to knock down all ten pins, this is referred to as an open frame. An open frame gets no bonus. Sorry. It does make the scoring easier, so if you don't want to have to add bonus rolls to your frame scores, never knock down all ten pins in a frame. Voila!</p>
+
+        <h3>Make it count!</h3>
+        <p>What I think is confusing to many about this simple scoring system is that, while there are only two rolls per frame and ten pins at the end of the lane, each frame is worth 30 points! Think of each frame has having three rolls, not two, since a strike yeilds two bonus rolls and a spare one bonus (in both cases the bonus roll is taken in normal turn, in subsequent frames). Consider a bowler who rolls two strikes in a row. This is referred to imaginatively as a "double". The next roll counts for the current frame, but <strong>also</strong> the frame before that, and the frame before that, or <strong>THREE</strong> times! This multiplier effect is powerful. If a bowler never knocked down all ten pins in any frame, meaning they had all open frames, the maximum their string score could be is 90 (9x10). If, however, they rolled a strike in every frame, which is a perfect game, each frame score is 30 for a string score of 300! (30x10). In a perfect game, every roll after the first two is tripled! So if you're out bowling and want to power-up your score, knock down all the pins, and then make the next roll(s) count, as those are the ones with the multiplying coefficient.</p>
       </div>
     </div>
   );
