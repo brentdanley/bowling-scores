@@ -3,14 +3,14 @@ import {Frame} from '../App'
 
 import styles from './rolls.module.scss'
 
-const Rolls = (props) => {
+const Rolls = (props: any) => {
     const [pinsLeft, setPins] = useState(10)
     const [isFirstRoll, setFirst] = useState(true)
     const [currentFrame, setCurrentFrame] = useState(0)
 
     const rollButtons = ['-', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'X']
 
-    const handleClick = (roll) => {
+    const handleClick = (roll: any) => {
 
         let rollPoints = roll
 
@@ -81,7 +81,7 @@ const Rolls = (props) => {
                     return <button
                         className={styles.pin}
                         onClick={() => handleClick(i)}
-                        disabled={i > pinsLeft ? 'disabled' : false}
+                        disabled={i <= pinsLeft ?? false}
                         key={i}
                         >{(i === pinsLeft && !isFirstRoll) ? '/' : button}</button>
                 })
