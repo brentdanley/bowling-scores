@@ -1,94 +1,153 @@
-import React, { useState } from 'react'
-import {Frame} from '../App'
+import React, { useState } from 'react';
 
-import styles from './rolls.module.scss'
+import styles from './rolls.module.scss';
 
-const Rolls = (props: any) => {
-    const [pinsLeft, setPins] = useState(10)
-    const [isFirstRoll, setFirst] = useState(true)
-    const [currentFrame, setCurrentFrame] = useState(0)
+const Rolls = ({ rolls, updateRolls, score, updateScore }: any) => {
+  const [pinsLeft, setPins] = useState(10);
+  const [isFirstRoll, setFirst] = useState(true);
+  const [rollIndex, setRollIndex] = useState<number>(0);
 
-    const rollButtons = ['-', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'X']
+  const tempRolls = [...rolls];
 
-    const handleClick = (roll: any) => {
+  const rollButtons = ['-', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'X'];
 
-        let rollPoints = roll
+  const handleClick = (roll: number) => {
+    let nextIndex = rollIndex + 1;
+    const currentFrame = Math.ceil((rollIndex + 1) / 3);
+    const frameRollOne = (currentFrame - 1) * 3;
+    const nextFrameIndex = frameRollOne + 3;
 
-        const tempFrames = [...props.frames]
-        // Add roll to current frame
-        if (currentFrame < 10) {
-            if (tempFrames[currentFrame].roll1 === null) {
-                tempFrames[currentFrame].roll1 = roll
-            } else {
-                tempFrames[currentFrame].roll2 = roll
-            }
+    tempRolls[rollIndex] = roll;
+
+    // First roll of frame
+    if (rollIndex === frameRollOne) {
+      // Roll is a strike (X)
+      if (roll === 10) {
+        nextIndex = nextFrameIndex;
+      }
+
+      // Two frames ago was a strike
+      if (currentFrame >= 3 && tempRolls[frameRollOne - 6] === 10) {
+        if (tempRolls[frameRollOne - 4] === null) {
+          tempRolls[frameRollOne - 4] = roll;
         }
+      }
 
-        // BONUSES
-        // The previous frame was a strike or spare
-        if (currentFrame > 0) {
-            if (tempFrames[currentFrame - 1].roll1 === 10 || tempFrames[currentFrame - 1].roll1 + tempFrames[currentFrame - 1].roll2 === 10) {
-                if (tempFrames[currentFrame - 1].roll2 === null) {
-                    tempFrames[currentFrame - 1].roll2 = roll
-                }
-                else {
-                    tempFrames[currentFrame - 1].roll3 = roll
-                }
-                if (currentFrame < 10) rollPoints += roll
-            }
+      // Last frame was a strike
+      if (currentFrame >= 2 && tempRolls[frameRollOne - 3] === 10) {
+        if (tempRolls[frameRollOne - 2] === null) {
+          tempRolls[frameRollOne - 2] = roll;
         }
+      }
 
-        // There was a strike two frames ago
-        if (currentFrame > 1 && tempFrames[currentFrame - 2].roll1 === 10) {
-            if (tempFrames[currentFrame - 1].roll3 === null) {
-                tempFrames[currentFrame - 2].roll3 = roll
-                if (currentFrame < 10) rollPoints += roll
-            }
-        }
-
-        props.updateScore(props.score + rollPoints)
-
-        // SET PINS
-        // string is complete
-        if (tempFrames[9].roll3 !== null || (tempFrames[9].roll2 !== null && tempFrames[9].roll1 + tempFrames[9].roll2 < 10)) {
-            setPins(-1)
-        } else {
-            // resets pins after roll
-            if (isFirstRoll && roll !== 10) { // first roll
-                setFirst(false)
-                setPins(10 - roll)
-            } else { // second roll or strike
-                setFirst(true)
-                setPins(10)
-                setCurrentFrame(currentFrame + 1)
-            }
-        }
-
-        props.updateFrames(tempFrames)
-
+      // Last frame was a spare
+      if (
+        currentFrame >= 2 &&
+        tempRolls[frameRollOne - 3] + tempRolls[frameRollOne - 2] === 10
+      ) {
+        tempRolls[frameRollOne - 1] = roll;
+      }
     }
 
-    const resetString = () => {
-        props.updateFrames([new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame(),new Frame()])
-        setPins(10)
-        setCurrentFrame(0)
+    // Second roll of frame
+    if (rollIndex === frameRollOne + 1) {
+      nextIndex = nextFrameIndex;
+
+      // Last frame was a strike
+      if (currentFrame >= 2 && tempRolls[frameRollOne - 3] === 10) {
+        if (tempRolls[frameRollOne - 1] === null) {
+          tempRolls[frameRollOne - 1] = roll;
+        }
+      }
+
+      // Open frame
+      if (tempRolls[frameRollOne] + roll < 10) {
+        tempRolls[frameRollOne + 2] = 0;
+      }
     }
 
-    return (
-        <div>
-            {
-                rollButtons.map((button, i) => {
-                    return <button
-                        className={styles.pin}
-                        onClick={() => handleClick(i)}
-                        disabled={i <= pinsLeft ?? false}
-                        key={i}
-                        >{(i === pinsLeft && !isFirstRoll) ? '/' : button}</button>
-                })
-            }
-            <button className={styles.resetButton} onClick={resetString}>Reset String</button>
-        </div>
-    )
-}
+    setRollIndex(nextIndex);
 
-export default Rolls
+    // SET PINS
+    // string is complete
+    if (
+      tempRolls[29] !== null ||
+      (tempRolls[27] !== null && tempRolls[28] !== null && tempRolls[27] + tempRolls[28] < 10)
+    ) {
+      setPins(-1);
+    } else {
+      // resets pins after roll
+      if (isFirstRoll && roll !== 10) {
+        // first roll
+        setFirst(false);
+        setPins(10 - roll);
+      } else {
+        // second roll or strike
+        setFirst(true);
+        setPins(10);
+      }
+    }
+
+    updateRolls(tempRolls);
+  };
+
+  const resetString = () => {
+    updateRolls([
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]);
+    setPins(10);
+    updateScore(0);
+    setRollIndex(0);
+  };
+
+  return (
+    <div>
+      {rollButtons.map((button, i) => {
+        return (
+          <button
+            className={styles.pin}
+            onClick={() => handleClick(i)}
+            disabled={i > pinsLeft ?? false}
+            key={`pin${i}`}
+          >
+            {i === pinsLeft && !isFirstRoll ? '/' : button}
+          </button>
+        );
+      })}
+      <button className={styles.resetButton} onClick={resetString}>
+        Reset String
+      </button>
+    </div>
+  );
+};
+
+export default Rolls;
