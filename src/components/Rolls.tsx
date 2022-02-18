@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
+import ProgressSlider from './Progress';
+import { RollsType } from '../App';
 
 import styles from './rolls.module.scss';
 
-const Rolls = ({ rolls, updateRolls, score, updateScore }: any) => {
+const Rolls = ({
+  rolls,
+  updateRolls,
+}: {
+  rolls: RollsType;
+  updateRolls(rolls: RollsType): void;
+}) => {
   const [pinsLeft, setPins] = useState(10);
   const [isFirstRoll, setFirst] = useState(true);
   const [rollIndex, setRollIndex] = useState<number>(0);
@@ -43,7 +51,7 @@ const Rolls = ({ rolls, updateRolls, score, updateScore }: any) => {
       // Last frame was a spare
       if (
         currentFrame >= 2 &&
-        tempRolls[frameRollOne - 3] + tempRolls[frameRollOne - 2] === 10
+        tempRolls[frameRollOne - 3]! + tempRolls[frameRollOne - 2]! === 10
       ) {
         tempRolls[frameRollOne - 1] = roll;
       }
@@ -61,7 +69,7 @@ const Rolls = ({ rolls, updateRolls, score, updateScore }: any) => {
       }
 
       // Open frame
-      if (tempRolls[frameRollOne] + roll < 10) {
+      if (tempRolls[frameRollOne]! + roll < 10) {
         tempRolls[frameRollOne + 2] = 0;
       }
     }
@@ -72,7 +80,9 @@ const Rolls = ({ rolls, updateRolls, score, updateScore }: any) => {
     // string is complete
     if (
       tempRolls[29] !== null ||
-      (tempRolls[27] !== null && tempRolls[28] !== null && tempRolls[27] + tempRolls[28] < 10)
+      (tempRolls[27] !== null &&
+        tempRolls[28] !== null &&
+        tempRolls[27] + tempRolls[28] < 10)
     ) {
       setPins(-1);
     } else {
@@ -125,8 +135,8 @@ const Rolls = ({ rolls, updateRolls, score, updateScore }: any) => {
       null
     ]);
     setPins(10);
-    updateScore(0);
     setRollIndex(0);
+    setFirst(true);
   };
 
   return (
@@ -143,6 +153,7 @@ const Rolls = ({ rolls, updateRolls, score, updateScore }: any) => {
           </button>
         );
       })}
+      <ProgressSlider rolls={rolls} />
       <button className={styles.resetButton} onClick={resetString}>
         Reset String
       </button>
