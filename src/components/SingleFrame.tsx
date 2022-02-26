@@ -9,6 +9,7 @@ let isCompletedFrame = (frame: (number|null)[]): boolean => {
 const frameJSX = (frame: (number|null)[], i: number, stringScore: number) => {
     let rollOneDisplay = frame[0] ?? '' 
     let rollTwoDisplay = frame[1] ?? ''
+    let rollThreeDisplay = frame[2] ?? ''
 
     // Gutter balls
     if (frame[0] === 0) {
@@ -29,8 +30,24 @@ const frameJSX = (frame: (number|null)[], i: number, stringScore: number) => {
         rollTwoDisplay = 'X'
     }
 
+    // Tenth frame
     if (i === 9) {
-        return <><div className={styles.roll1}>{frame[0] !== 10 ? frame[1] : 'X'}</div><div className={styles.roll2}>{frame[1] !== 0 && frame[0]! + frame[1]! === 10 ? '/' : frame[1]}</div><div className={styles.roll3}>{frame[2]}</div><div className={styles.score}>{isCompletedFrame(frame) ? stringScore : ''}</div></>
+        if (rollOneDisplay === 10) {
+            rollOneDisplay = 'X'
+            if (rollTwoDisplay === 10) {
+                rollTwoDisplay = 'X'
+                if (rollThreeDisplay === 10) {
+                    rollThreeDisplay = 'X'
+                }
+            }
+        }
+        else if (rollOneDisplay !== null && +rollOneDisplay + +rollTwoDisplay === 10) {
+            rollTwoDisplay = '/'
+        }
+    }
+
+    if (i === 9) {
+        return <><div className={styles.roll1}>{rollOneDisplay}</div><div className={styles.roll2}>{rollTwoDisplay}</div><div className={styles.roll3}>{rollThreeDisplay}</div><div className={styles.score}>{isCompletedFrame(frame) ? stringScore : ''}</div></>
     }
     return <><div className={styles.roll1}>{rollOneDisplay}</div><div className={styles.roll2}>{rollTwoDisplay}</div><div className={styles.score}>{isCompletedFrame(frame) ? stringScore : ''}</div></>
 }
