@@ -5,7 +5,6 @@
     border: 1px solid black;
 
     &.strike {
-        background-color:rgb(238, 137, 154);
         
         .roll2 {
             color: red;
@@ -26,7 +25,6 @@
     }
     
     &.spare {
-        background-color: rgb(179, 179, 179);
         
         .roll2 {
             color: rgb(14, 68, 148);
@@ -36,7 +34,6 @@
     
     &.current {
         border: 3px solid rgb(14, 68, 148);
-        // background: radial-gradient(circle, rgba(25,66,120,0.4) 0%, rgba(9,121,17,0.4) 100%);
     }
     
     &.ten {
